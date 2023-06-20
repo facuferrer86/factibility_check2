@@ -1,0 +1,8 @@
+BusinessPartnerName,CustomerNumber,PurchaseOrderNumber,TransactionDate,NetAmount,Currency,TransactionDescription,TransactionStatus,BlockStatus
+"BGH Tech Partner S.A.",,4800000006,2023-06-14,27500.0,ARS,"Pago a 7 días Fecha",R,
+"BGH Tech Partner S.A.",,4500000336,2023-06-06,5000000.0,ARS,"Pago a 60 días Fecha",V,
+"BGH Tech Partner S.A.",,4500000335,2023-06-14,16000.0,ARS,"Pago a 7 días Fecha",R,
+"BGH Tech Partner S.A.",,4500000334,2023-06-14,240000.0,ARS,"Pago a 7 días Fecha",R,
+"BGH Tech Partner S.A.",,4300000003,2023-06-14,36000.0,ARS,"Pago a 7 días Fecha",R,
+"BGH Tech Partner S.A.",,4300000002,2023-06-14,200000.0,ARS,"Pago a 7 días Fecha",R,
+"BGH Tech Partner S.A.",,4600000045,2023-06-14,10000.0,ARS,"Pago a 7 días Fecha",R

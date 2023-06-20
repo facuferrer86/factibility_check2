@@ -1,0 +1,39 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "cds watch",
+      "command": "cds",
+      "args": [
+        "watch"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "cds serve",
+      "command": "cds",
+      "args": [
+        "serve",
+        "--with-mocks",
+        "--in-memory?"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build supplier-portal-fe",
+      "type": "shell",
+      "command": "if [ ! -f ${workspaceFolder}/supplier-portal-fe/node_modules/@sap/html5-repo-mock/index.js ] || [ ! -f ${workspaceFolder}/supplier-portal-fe/node_modules/@sap/approuter/approuter.js ]; then npm i @sap/approuter && npm i @sap/html5-repo-mock; fi",
+      "options": {
+        "cwd": "${workspaceFolder}/supplier-portal-fe"
+      }
+    }
+  ]
+}

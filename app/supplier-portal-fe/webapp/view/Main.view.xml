@@ -1,0 +1,128 @@
+<mvc:View controllerName="com.solarc.supplierportalfe.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:st="sap.ui.comp.smarttable"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{view>/supplierOrdersList/headerExpanded}" busyIndicatorDelay="{view>/busyIndicatorDelay}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="com.solarc.supplierportalfe.elsmvm" showShare="true" showExecuteOnSelection="true" entitySet="SupplierOrders"/>
+                </f:heading>
+                <f:snappedContent>
+                    <Text id="statusText"></Text>
+                </f:snappedContent>
+
+                <f:actions>
+                    <Button text="{i18n>Create}" icon="sap-icon://add" type="Emphasized" press="onSupplierOrdersCreate"/>
+                </f:actions>
+
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <sfb:SmartFilterBar id="smartFilterBar" liveMode="true" smartVariant="__SVM01" useToolbar="false" entitySet="SupplierOrders" persistencyKey="com.solarc.supplierportalfe.elsmvm" assignedFiltersChanged="onAssignedFiltersChanged" enableBasicSearch="true" basicSearchFieldName="Country">
+                        <sfb:controlConfiguration>
+                            <sfb:ControlConfiguration key="BusinessPartnerName" visibleInAdvancedArea="true">
+                            </sfb:ControlConfiguration>
+                            <sfb:ControlConfiguration key="TransactionStatus" visibleInAdvancedArea="true">
+                            </sfb:ControlConfiguration>
+                        </sfb:controlConfiguration>
+
+                        <!-- layout data used to make the table growing but the filter bar fixed -->
+                        <sfb:layoutData>
+                            <FlexItemData shrinkFactor="0"/>
+                        </sfb:layoutData>
+
+                    </sfb:SmartFilterBar>
+
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <st:SmartTable id="supplierOrderssTable" 
+            placeToolbarInTable="true"
+            smartVariant="__SVM01" beforeRebindTable="onBeforeRebindTable" persistencyKey="com.solarc.supplierportalfe.elsmvm" entitySet="SupplierOrders" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="true" useVariantManagement="true" enableAutoBinding="true" requestAtLeastFields="BusinessPartnerName,CustomerNumber,PurchaseOrderNumber,TransactionDate,NetAmount,Currency,TransactionDescription,TransactionStatus,BlockStatus" useTablePersonalisation="true" showRowCount="true">
+                <st:layoutData>
+                    <FlexItemData growFactor="1" baseSize="0%"/>
+                </st:layoutData>
+                <st:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <OverflowToolbarToggleButton tooltip="Edit" text="Edit" icon="sap-icon://edit" pressed="{view>/supplierOrdersList/bEditMode}"/>
+                        <OverflowToolbarButton icon="sap-icon://delete" tooltip="Delete" press="onDeleteSupplierOrders" enabled="{= ${view>/supplierOrdersList/bEditMode} &amp;&amp; ${view>/supplierOrdersList/bDeleteEnabled} }"/>
+                    </OverflowToolbar>
+                </st:customToolbar>
+                <Table id="extractsTable" sticky="ColumnHeaders,HeaderToolbar" mode="{= ${view>/supplierOrdersList/bEditMode} ? 'SingleSelectLeft' : 'None'}" selectionChange="onSelectSupplierOrders" growing="true" growingScrollToLoad="true" growingThreshold="100">
+                
+                    <columns>
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "BusinessPartnerName","columnIndex":"0", "leadingProperty": "BusinessPartnerName", "filterProperty": "BusinessPartnerName", "sortProperty": "BusinessPartnerName", "type": "string"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.BusinessPartnerName}"/>
+                        </Column>
+
+                        <Column demandPopin="true" minScreenWidth="Tablet">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "PurchaseOrderNumber","columnIndex":"2", "leadingProperty": "PurchaseOrderNumber", "filterProperty": "PurchaseOrderNumber", "sortProperty": "PurchaseOrderNumber", "type": "string"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.PurchaseOrderNumber}"/>
+                        </Column>
+                        <Column demandPopin="true" minScreenWidth="Tablet">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "TransactionDate","columnIndex":"3", "leadingProperty": "TransactionDate", "filterProperty": "TransactionDate", "sortProperty": "TransactionDate", "type": "date"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.TransactionDate}"/>
+                        </Column>
+                        <Column demandPopin="true" minScreenWidth="Tablet">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "NetAmount","columnIndex":"4", "leadingProperty": "NetAmount", "filterProperty": "NetAmount", "sortProperty": "NetAmount", "type": "string"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.NetAmount}"/>
+                        </Column>
+                        <Column demandPopin="true" minScreenWidth="Desktop">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "TransactionDescription","columnIndex":"5", "leadingProperty": "TransactionDescription", "filterProperty": "TransactionDescription", "sortProperty": "TransactionDescription", "type": "string"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.TransactionDescription}"/>
+                        </Column>
+                        <Column demandPopin="true" minScreenWidth="Desktop">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "TransactionStatus","columnIndex":"6", "leadingProperty": "TransactionStatus", "filterProperty": "TransactionStatus", "sortProperty": "TransactionStatus", "type": "string"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.TransactionStatus}"/>
+                        </Column>
+                        <Column demandPopin="true" minScreenWidth="Desktop">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "BlockStatus","columnIndex":"7", "leadingProperty": "BlockStatus", "filterProperty": "BlockStatus", "sortProperty": "BlockStatus", "type": "string"}'/>
+                            </customData>
+                            <Text text="{i18n>supplierOrdersList.BlockStatus}"/>
+                        </Column>
+                    </columns>
+                    <items>
+                    <!-- BusinessPartnerName,CustomerNumber,PurchaseOrderNumber,TransactionDate,NetAmount,Currency,TransactionDescription,TransactionStatus,BlockStatus-->
+                        <ColumnListItem type="Navigation" press="onSupplierOrdersPress">
+                            <cells>
+                                <Text text="{BusinessPartnerName}"/>
+                                <Text text="{PurchaseOrderNumber}"/>
+                                <Text text="{path: 'TransactionDate', type: '.types.SolarcDateType'}"/>
+                                <Text text="{NetAmount} {Currency}"/>
+                                <Text text="{TransactionDescription}"/>
+                                <Text text="{TransactionStatus}"/>
+                                <Text text="{BlockStatus}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </st:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

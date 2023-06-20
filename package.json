@@ -1,0 +1,27 @@
+{
+  "name": "supplier-portal",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.10.6",
+    "@sap/cds": "^6",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.108.7",
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-supplier-portal-fe": "cds watch --open supplier-portal-fe/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "cov2ap" : {
+      "plugin" : true
+      }
+    }
+  
+}
